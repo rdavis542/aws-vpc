@@ -11,7 +11,7 @@ env:
   AWS_REGION: us-east-1   
 
 jobs:
-  build:
+  configure:
     runs-on: ubuntu-latest
 
     steps:
@@ -28,7 +28,9 @@ jobs:
     - name: Setup Terraform
       uses: hashicorp/setup-terraform@v2
 
-    - name: List files
+  build:
+
+    - name: execute terraform
       run: /home/runner/work/aws-vpc/aws-vpc/bin/make-vpc.sh
 
 #    - name: tf-init
