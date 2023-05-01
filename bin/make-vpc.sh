@@ -2,3 +2,7 @@
 
 cd  /home/runner/work/aws-vpc/aws-vpc/terraform/
 ls -lahtr .
+
+terraform init 
+
+echo "Init complete"
