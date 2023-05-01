@@ -11,7 +11,7 @@ env:
   AWS_REGION: us-east-1   
 
 jobs:
-  build tf and run plan:
+  build-tf-and-run-plan:
     runs-on: ubuntu-latest
 
     steps:
