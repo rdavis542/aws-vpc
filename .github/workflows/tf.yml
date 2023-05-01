@@ -29,6 +29,7 @@ jobs:
       uses: hashicorp/setup-terraform@v2
 
   build:
+    runs-on: ubuntu-latest
     steps:
     - name: execute terraform
       run: /home/runner/work/aws-vpc/aws-vpc/bin/make-vpc.sh
