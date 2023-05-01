@@ -30,7 +30,7 @@ jobs:
         aws-region: ${{ env.AWS_REGION }}
 
     - name: Setup Terraform
-      uses: hashicorp/setup-terraform@v1
+      uses: hashicorp/setup-terraform@v2
 
     - name: tf-init
       run: terraform init
@@ -39,7 +39,7 @@ jobs:
       run: terraform fmt
 
     - name: tf-plan
-      run: terraform plan --var-file=./terraform-vpc.tfvars
+      run: terraform plan --var-file=terraform-vpc.tfvars
 
 #    - name: tf-apply
 #      run: terraform apply --var-file=./terraform-vpc.tfvars
