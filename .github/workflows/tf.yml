@@ -30,15 +30,3 @@ jobs:
 
     - name: execute terraform
       run: /home/runner/work/aws-vpc/aws-vpc/bin/make-vpc.sh
-
-#    - name: tf-init
-#      run: terraform init
-
-#    - name: tf-format
-#      run: terraform fmt
-
-#    - name: tf-plan
-#      run: terraform plan --var-file=/home/runner/work/aws-vpc/aws-vpc/terraform/terraform-vpc.tfvars
-
-#    - name: tf-apply
-#      run: terraform apply --var-file=./terraform-vpc.tfvars

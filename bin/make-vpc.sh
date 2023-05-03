@@ -25,3 +25,11 @@ echo ""
 echo "Plan complete"
 echo ""
 echo "******************************************************************"
+
+terraform apply -auto-approve --var-file=/home/runner/work/aws-vpc/aws-vpc/terraform/terraform-vpc.tfvars
+
+echo "******************************************************************"
+echo ""
+echo "Apply complete"
+echo ""
+echo "******************************************************************"
