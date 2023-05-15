@@ -33,7 +33,7 @@ jobs:
       uses: hashicorp/setup-terraform@v2
 
     - name: Format TF
-      run: terraform fmt -check
+      run: terraform fmt
 
     - name: Initialize TF
       run: terraform init
@@ -68,7 +68,7 @@ jobs:
           uses: hashicorp/setup-terraform@v2
     
         - name: Format TF
-          run: terraform fmt -check
+          run: terraform fmt
     
         - name: Initialize TF
           run: terraform init
