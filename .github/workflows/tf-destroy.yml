@@ -1,4 +1,4 @@
-name: 'aws-vpc-build'
+name: 'aws-vpc-destroy'
 
 on:
 #  push:
@@ -9,15 +9,20 @@ env:
   AWS_REGION: us-east-1   
 
 jobs:
-  destroy-tf-and-run-plan:
+  tf-vpc-destrpu:
+    name:  "Terraform VPC Destroy"
     runs-on: ubuntu-latest
-
+    defaults:
+      run:
+        working-directory: ./terraform
+    permissions:
+        pull-requests: write
     steps:
     - name: Checkout
       uses: actions/checkout@v3
 
     - name: Configure AWS credentials
-      uses: aws-actions/configure-aws-credentials@v1
+      uses: aws-actions/configure-aws-credentials@v2
       with:
         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
@@ -26,5 +31,8 @@ jobs:
     - name: Setup Terraform
       uses: hashicorp/setup-terraform@v2
 
-    - name: execute terraform
-      run: /home/runner/work/aws-vpc/aws-vpc/bin/destroy-vpc.sh
+    - name: Initialize TF
+      run: terraform init
+
+    - name: VPC Destroy
+      run: terraform destroy -auto-approve --var-file=./terraform-vpc.tfvars
