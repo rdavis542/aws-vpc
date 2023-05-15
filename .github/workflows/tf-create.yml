@@ -21,6 +21,9 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v3
+      with: 
+        repository: https://github.com/rdavis542/aws-vpc/
+        ref: main
 
     - name: Configure AWS credentials
       uses: aws-actions/configure-aws-credentials@v2
