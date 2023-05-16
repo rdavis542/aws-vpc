@@ -34,3 +34,12 @@ resource "aws_subnet" "vpc-subnets" {
   }
 
 }
+
+resource "aws_internet_gateway" "main-east-ig" {
+  vpc_id = aws_vpc.main.id
+  
+  tags = {
+    Name = "main-east-ig"
+  }
+  
+}
