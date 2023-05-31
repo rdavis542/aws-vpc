@@ -13,6 +13,10 @@ resource "aws_security_group" "ssh_access" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 
+  tags = {
+    Name = "ssh_access"
+  }
+
 }
 
 resource "aws_security_group" "http_access" {
@@ -28,6 +32,10 @@ resource "aws_security_group" "http_access" {
     to_port     = 80
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  tags = {
+    Name = "http_access"
   }
 
 }
