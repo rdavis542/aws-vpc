@@ -3,16 +3,30 @@ variable "region" {
   description = "region you want to use"
 }
 
-variable "subnet_private" {
+variable "subnet_private_a" {
 
-  type        = map(string)
+  type        = string
   description = "subnets to support the vpc"
 
 }
 
-variable "subnet_public" {
+variable "subnet_private_b" {
 
-  type        = map(string)
+  type        = string
+  description = "subnets to support the vpc"
+
+}
+
+variable "subnet_public_a" {
+
+  type        = string
+  description = "subnets to support the vpc"
+
+}
+
+variable "subnet_public_b" {
+
+  type        = string
   description = "subnets to support the vpc"
 
 }
