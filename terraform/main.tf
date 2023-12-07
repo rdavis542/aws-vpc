@@ -2,7 +2,7 @@ terraform {
   required_version = ">=1.0.0"
   required_providers {
     aws = {
-      version = ">= 5.0.0"
+      version = ">= 4.0.0"
       source = "hashicorp/aws"
     }
   }
@@ -142,7 +142,7 @@ resource "aws_route_table_association" "private_route_table_association_a" {
 }
 
 resource "aws_eip" "nat_gateway_eip" {
-  domain = "vpc"
+  vpc = "true"
   
 }
 
