@@ -3,7 +3,14 @@ variable "region" {
   description = "region you want to use"
 }
 
-variable "subnet" {
+variable "subnet_private" {
+
+  type        = map(string)
+  description = "subnets to support the vpc"
+
+}
+
+variable "subnet_public" {
 
   type        = map(string)
   description = "subnets to support the vpc"
@@ -17,7 +24,14 @@ variable "cidr_block" {
 
 }
 
-variable "az" {
+variable "az1" {
+
+  type        = string
+  description = "Avail zone assigned"
+
+}
+
+variable "az2" {
 
   type        = string
   description = "Avail zone assigned"
