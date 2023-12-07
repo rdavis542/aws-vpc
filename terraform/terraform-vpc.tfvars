@@ -1,4 +1,4 @@
-cidr_block = "10.2.0.0/16"
+cidr_block = "10.0.0.0/16"
 
 subnet_private_a = "10.2.5.0/24"
 subnet_private_b = "10.2.6.0/24"
