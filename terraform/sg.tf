@@ -39,3 +39,24 @@ resource "aws_security_group" "http_access" {
   }
 
 }
+
+resource "aws_security_group" "posstgres_access" {
+
+  vpc_id                  = aws_vpc.main.id
+  name        = "postgres_access"
+  description = "Allow pgsql Inbound"
+
+
+  ingress {
+    description = "pgsql access"
+    from_port   = 5432
+    to_port     = 5432
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  tags = {
+    Name = "pgsql_access"
+  }
+
+}
