@@ -1,6 +1,6 @@
 resource "aws_security_group" "ssh_access" {
 
-  vpc_id                  = aws_vpc.main.id
+  vpc_id      = aws_vpc.main.id
   name        = "SSH_access"
   description = "Allow SSH Inbound"
 
@@ -21,7 +21,7 @@ resource "aws_security_group" "ssh_access" {
 
 resource "aws_security_group" "http_access" {
 
-  vpc_id                  = aws_vpc.main.id
+  vpc_id      = aws_vpc.main.id
   name        = "http_access"
   description = "Allow http Inbound"
 
@@ -42,7 +42,7 @@ resource "aws_security_group" "http_access" {
 
 resource "aws_security_group" "posstgres_access" {
 
-  vpc_id                  = aws_vpc.main.id
+  vpc_id      = aws_vpc.main.id
   name        = "postgres_access"
   description = "Allow pgsql Inbound"
 
