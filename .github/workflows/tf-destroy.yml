@@ -1,4 +1,4 @@
-name: 'aws-vpc-destroy'
+name: "aws-vpc-destroy"
 
 on:
 #  push:
