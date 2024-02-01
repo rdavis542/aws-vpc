@@ -1,11 +1,4 @@
-resource "aws_internet_gateway" "main-east-ig" {
-  vpc_id = aws_vpc.main.id
 
-  tags = {
-    Name = "main-east-ig"
-  }
-
-}
 
 resource "aws_route_table" "public_route_table" {
 
