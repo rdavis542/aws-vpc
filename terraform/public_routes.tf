@@ -23,23 +23,26 @@ resource "aws_route_table_association" "public_route_table_association_b" {
 
 }
 
+###### Route traffic between public/private VLAN with below
+/*
+resource "aws_route_table" "public_route_table_a" {
+  vpc_id = aws_vpc.main.id
+  route {
+    cidr_block = "0.0.0.0/0"
+    gateway_id = aws_nat_gateway.nat_gateway.id
+  }
 
-#resource "aws_route_table" "public_route_table_a" {
-#  vpc_id = aws_vpc.main.id
-#  route {
-#    cidr_block = "0.0.0.0/0"
-#    gateway_id = aws_nat_gateway.nat_gateway.id
-#  }
+  tags = {
+    Name = "main-east-ig-public-route-table"
+  }
 
-#  tags = {
-#    Name = "main-east-ig-public-route-table"
-#  }
+}
 
-#}
+resource "aws_nat_gateway" "nat_gateway" {
+  allocation_id = aws_eip.nat_gateway_eip.id
+  subnet_id = aws_subnet.vpc-public-subnet_a.id
+  depends_on = [ aws_internet_gateway.main-east-ig ]
 
-#resource "aws_nat_gateway" "nat_gateway" {
-#  allocation_id = aws_eip.nat_gateway_eip.id
-#  subnet_id = aws_subnet.vpc-public-subnet_a.id
-#  depends_on = [ aws_internet_gateway.main-east-ig ]
+}
 
-#}
+*/

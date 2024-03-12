@@ -29,6 +29,11 @@ resource "aws_nat_gateway" "nat_gateway" {
   depends_on = [ aws_internet_gateway.main-east-ig ]
 }
 
+
+#####  VPC Endpoint for a S3 private endpoint
+# Remove comments to use
+#
+/*
 resource "aws_vpc_endpoint" "s3_private_endpoint" {
 
   vpc_id       = aws_vpc.main.id
@@ -41,3 +46,4 @@ resource "aws_vpc_endpoint_route_table_association" "s3_private_endpoint_vpc_ass
   vpc_endpoint_id = aws_vpc_endpoint.s3_private_endpoint.id
 
 }
+*/

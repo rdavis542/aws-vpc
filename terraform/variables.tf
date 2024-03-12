@@ -17,6 +17,13 @@ variable "subnet_private_b" {
 
 }
 
+variable "subnet_private_c" {
+
+  type        = string
+  description = "subnets to support the vpc"
+
+}
+
 variable "subnet_public_a" {
 
   type        = string
@@ -31,6 +38,13 @@ variable "subnet_public_b" {
 
 }
 
+variable "subnet_public_c" {
+
+  type        = string
+  description = "subnets to support the vpc"
+
+}
+
 variable "cidr_block" {
 
   type        = string
@@ -38,19 +52,28 @@ variable "cidr_block" {
 
 }
 
-variable "az1" {
+variable "azA" {
 
   type        = string
   description = "Avail zone assigned"
 
 }
 
-variable "az2" {
+variable "azB" {
 
   type        = string
   description = "Avail zone assigned"
 
 }
+
+
+variable "azC" {
+
+  type        = string
+  description = "Avail zone assigned"
+
+}
+
 
 variable "default_tags" {
   description = "Default tags too apply to all resources"
