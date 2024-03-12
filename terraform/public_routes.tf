@@ -7,9 +7,7 @@ resource "aws_route_table" "public_route_table" {
     gateway_id = aws_internet_gateway.main-east-ig.id
   }
 
-  tags = {
-    Name = "main-east-ig-public-route-table"
-  }
+  tags = merge(var.default_tags, {Name = "main-east-ig-public-route-table"})
 
 }
 

@@ -51,3 +51,13 @@ variable "az2" {
   description = "Avail zone assigned"
 
 }
+
+variable "default_tags" {
+  description = "Default tags too apply to all resources"
+  default = {
+    "Environment" = "Development"
+    "Infrastructure" = "VPC"
+    "REPO" = "aws-vpc"
+  }
+  
+}

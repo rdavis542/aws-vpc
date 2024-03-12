@@ -16,11 +16,6 @@ resource "aws_security_group" "default" {
   }
 }
 
-
-
-
-
-
 resource "aws_security_group" "ssh_access" {
 
   vpc_id      = aws_vpc.main.id
@@ -34,6 +29,13 @@ resource "aws_security_group" "ssh_access" {
     to_port     = 22
     protocol    = "tcp"
     cidr_blocks = [aws_subnet.vpc-public-subnet_a.cidr_block, aws_subnet.vpc-public-subnet_b.cidr_block]
+  }
+
+    egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
   }
 
   tags = {
@@ -57,13 +59,48 @@ resource "aws_security_group" "http_access" {
     cidr_blocks = [aws_subnet.vpc-public-subnet_a.cidr_block]
   }
 
+    egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
   tags = {
     Name = "http_access"
   }
 
 }
 
-resource "aws_security_group" "posstgres_access" {
+resource "aws_security_group" "https_access" {
+
+  vpc_id      = aws_vpc.main.id
+  name        = "https_access"
+  description = "Allow https Inbound"
+
+
+  ingress {
+    description = "https access"
+    from_port   = 443
+    to_port     = 443
+    protocol    = "tcp"
+    cidr_blocks = [aws_subnet.vpc-public-subnet_a.cidr_block]
+  }
+
+    egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  tags = {
+    Name = "http_access"
+  }
+
+}
+
+resource "aws_security_group" "postgres_access" {
 
   vpc_id      = aws_vpc.main.id
   name        = "postgres_access"
@@ -76,6 +113,13 @@ resource "aws_security_group" "posstgres_access" {
     to_port     = 5432
     protocol    = "tcp"
     cidr_blocks = [aws_subnet.vpc-public-subnet_a.cidr_block]
+  }
+
+    egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
   }
 
   tags = {
