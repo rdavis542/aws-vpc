@@ -95,7 +95,35 @@ resource "aws_security_group" "https_access" {
   }
 
   tags = {
-    Name = "http_access"
+    Name = "https_access"
+  }
+
+}
+
+resource "aws_security_group" "https_access_private_subnet" {
+
+  vpc_id      = aws_vpc.main.id
+  name        = "https_access_private"
+  description = "Allow https Inbound on Private subnet"
+
+
+  ingress {
+    description = "https access"
+    from_port   = 443
+    to_port     = 443
+    protocol    = "tcp"
+    cidr_blocks = [aws_subnet.vpc-private-subnet_a.cidr_block]
+  }
+
+    egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  tags = {
+    Name = "https_access private subnet"
   }
 
 }
