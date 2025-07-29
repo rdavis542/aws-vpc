@@ -5,10 +5,9 @@ resource "aws_route_table" "private_route_table_a" {
     cidr_block = "0.0.0.0/0"
     gateway_id = aws_nat_gateway.nat_gateway.id
   }
-  tags = {
-    Name = "main-east-ig-private-route-table"
-  }
+  tags = merge(var.default_tags, {Name = "private-route-table-A"})
 }
+
 
 resource "aws_route_table_association" "private_route_table_association_a" {
   subnet_id      = aws_subnet.vpc-private-subnet_a.id
@@ -23,7 +22,7 @@ resource "aws_route_table" "private_route_table_b" {
     gateway_id = aws_nat_gateway.nat_gateway.id
   }
   tags = {
-    Name = "main-east-ig-private-route-table"
+   tags = merge(var.default_tags, {Name = "private-route-table-B"})
   }
 }
 
@@ -47,6 +46,8 @@ resource "aws_nat_gateway" "nat_gateway" {
   allocation_id = aws_eip.nat_gateway_eip.id
   subnet_id = aws_subnet.vpc-public-subnet_a.id
   depends_on = [ aws_internet_gateway.main-east-ig ]
+
+  tags = merge(var.default_tags, {Name = "nat_gateway"})
 }
 
 

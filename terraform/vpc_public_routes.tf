@@ -7,7 +7,7 @@ resource "aws_route_table" "public_route_table_a" {
     gateway_id = aws_internet_gateway.main-east-ig.id
   }
 
-  tags = merge(var.default_tags, {Name = "main-east-ig-public-route-table"})
+  tags = merge(var.default_tags, {Name = "main-public-route-table-A"})
 
 }
 
@@ -19,7 +19,7 @@ resource "aws_route_table" "public_route_table_b" {
     gateway_id = aws_internet_gateway.main-east-ig.id
   }
 
-  tags = merge(var.default_tags, {Name = "main-east-ig-public-route-table"})
+  tags = merge(var.default_tags, {Name = "main-public-route-table-B"})
 
 }
 
