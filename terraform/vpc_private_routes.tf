@@ -5,11 +5,9 @@ resource "aws_route_table" "private_route_table_a" {
     cidr_block = "0.0.0.0/0"
     gateway_id = aws_nat_gateway.nat_gateway.id
   }
-
   tags = {
     Name = "main-east-ig-private-route-table"
   }
-
 }
 
 resource "aws_route_table_association" "private_route_table_association_a" {
@@ -17,6 +15,24 @@ resource "aws_route_table_association" "private_route_table_association_a" {
   route_table_id = aws_route_table.private_route_table_a.id
 
 }
+
+resource "aws_route_table" "private_route_table_b" {
+  vpc_id = aws_vpc.main.id
+  route {
+    cidr_block = "0.0.0.0/0"
+    gateway_id = aws_nat_gateway.nat_gateway.id
+  }
+  tags = {
+    Name = "main-east-ig-private-route-table"
+  }
+}
+
+resource "aws_route_table_association" "private_route_table_association_b" {
+  subnet_id      = aws_subnet.vpc-private-subnet_b.id
+  route_table_id = aws_route_table.private_route_table_b.id
+
+}
+
 
 resource "aws_eip" "nat_gateway_eip" {
   vpc = "true"
