@@ -33,10 +33,14 @@ resource "aws_route_table_association" "private_route_table_association_b" {
 
 }
 
-
 resource "aws_eip" "nat_gateway_eip" {
-  vpc = "true"
+  domain = "vpc"
+  
+  tags = {
+    Name = "nat-eip"
+  }
 
+  depends_on = [aws_internet_gateway.main-east-ig]
 }
 
 resource "aws_nat_gateway" "nat_gateway" {
