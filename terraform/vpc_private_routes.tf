@@ -1,10 +1,10 @@
 
 resource "aws_route_table" "private_route_table_a" {
   vpc_id = aws_vpc.main.id
-  route {
-    cidr_block = "0.0.0.0/0"
-    gateway_id = aws_nat_gateway.nat_gateway.id
-  }
+  # route {
+  #   cidr_block = "0.0.0.0/0"
+  #   gateway_id = aws_nat_gateway.nat_gateway.id
+  # }
   tags = merge(var.default_tags, {Name = "private-route-table-A"}, local.common_tags)
 }
 
@@ -17,10 +17,10 @@ resource "aws_route_table_association" "private_route_table_association_a" {
 
 resource "aws_route_table" "private_route_table_b" {
   vpc_id = aws_vpc.main.id
-  route {
-    cidr_block = "0.0.0.0/0"
-    gateway_id = aws_nat_gateway.nat_gateway.id
-  }
+  # route {
+  #   cidr_block = "0.0.0.0/0"
+  #   gateway_id = aws_nat_gateway.nat_gateway.id
+  # }
    tags = merge(var.default_tags, {Name = "private-route-table-B"}, local.common_tags)
 }
 
@@ -52,17 +52,13 @@ resource "aws_route_table_association" "private_route_table_association_b" {
 #####  VPC Endpoint for a S3 private endpoint
 # Remove comments to use
 #
-/*
+
 resource "aws_vpc_endpoint" "s3_private_endpoint" {
 
   vpc_id       = aws_vpc.main.id
   service_name = "com.amazonaws.us-east-1.s3"
 
-}
-
-resource "aws_vpc_endpoint_route_table_association" "s3_private_endpoint_vpc_associaton_a" {
-  route_table_id  = aws_route_table.private_route_table_a.id
-  vpc_endpoint_id = aws_vpc_endpoint.s3_private_endpoint.id
+  route_table_ids = [ aws_route_table.private_route_table_a.id, aws_route_table.private_route_table_b.id ]
+  tags = merge(var.default_tags, {Name = "private-route-table-B"}, local.common_tags)
 
 }
-*/
