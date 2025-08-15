@@ -30,23 +30,23 @@ resource "aws_route_table_association" "private_route_table_association_b" {
 
 }
 
-resource "aws_eip" "nat_gateway_eip" {
-  domain = "vpc"
+# resource "aws_eip" "nat_gateway_eip" {
+#   domain = "vpc"
   
-  tags = {
-    Name = "nat-eip"
-  }
+#   tags = {
+#     Name = "nat-eip"
+#   }
 
-  depends_on = [aws_internet_gateway.main-east-ig]
-}
+#   depends_on = [aws_internet_gateway.main-east-ig]
+# }
 
-resource "aws_nat_gateway" "nat_gateway" {
-  allocation_id = aws_eip.nat_gateway_eip.id
-  subnet_id = aws_subnet.vpc-public-subnet_a.id
-  depends_on = [ aws_internet_gateway.main-east-ig ]
+# resource "aws_nat_gateway" "nat_gateway" {
+#   allocation_id = aws_eip.nat_gateway_eip.id
+#   subnet_id = aws_subnet.vpc-public-subnet_a.id
+#   depends_on = [ aws_internet_gateway.main-east-ig ]
 
-  tags = merge(var.default_tags, {Name = "nat_gateway"}, local.common_tags)
-}
+#   tags = merge(var.default_tags, {Name = "nat_gateway"}, local.common_tags)
+# }
 
 
 #####  VPC Endpoint for a S3 private endpoint
