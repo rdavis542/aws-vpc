@@ -4,7 +4,7 @@ resource "aws_subnet" "vpc-public-subnet_a" {
   cidr_block              = var.subnet_public_a
   map_public_ip_on_launch = true
   availability_zone       = data.aws_availability_zones.available.names[0]
-  tags = merge(var.default_tags, {Name = "public-subnet-a"})
+  tags = merge(var.default_tags, {Name = "public-subnet-a"}, local.common_tags)
 
 }
 
@@ -13,7 +13,7 @@ resource "aws_subnet" "vpc-private-subnet_a" {
   vpc_id            = aws_vpc.main.id
   cidr_block        = var.subnet_private_a
   availability_zone = data.aws_availability_zones.available.names[1]
-  tags = merge(var.default_tags, {Name = "private-subnet-a"})
+  tags = merge(var.default_tags, {Name = "private-subnet-a"}, local.common_tags)
 
 }
 
@@ -23,7 +23,7 @@ resource "aws_subnet" "vpc-public-subnet_b" {
   cidr_block              = var.subnet_public_b
   map_public_ip_on_launch = true
   availability_zone       = data.aws_availability_zones.available.names[0]
-  tags = merge(var.default_tags, {Name = "public-subnet-b"})
+  tags = merge(var.default_tags, {Name = "public-subnet-b"}, local.common_tags)
 
 }
 
@@ -32,7 +32,7 @@ resource "aws_subnet" "vpc-private-subnet_b" {
   vpc_id            = aws_vpc.main.id
   cidr_block        = var.subnet_private_b
   availability_zone = data.aws_availability_zones.available.names[1]
-  tags = merge(var.default_tags, {Name = "private-subnet-b"})
+  tags = merge(var.default_tags, {Name = "private-subnet-b"}, local.common_tags)
 
 }
 
