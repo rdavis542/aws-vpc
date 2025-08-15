@@ -8,7 +8,7 @@ locals {
     Environment   = terraform.workspace
     Project       = "infrastructure"
     ManagedBy     = "Terraform"
-    Region        = data.region
+    Region        = data.aws_region
   }
 
 }
