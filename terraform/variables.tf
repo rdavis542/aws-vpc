@@ -78,7 +78,6 @@ variable "azC" {
 variable "default_tags" {
   description = "Default tags too apply to all resources"
   default = {
-    "Environment" = "Development"
     "Infrastructure" = "VPC"
     "REPO" = "aws-vpc"
   }
