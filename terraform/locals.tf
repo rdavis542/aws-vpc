@@ -9,6 +9,12 @@ locals {
     Project       = "infrastructure"
     ManagedBy     = "Terraform"
     Region        = var.region
+    CreatedBy     = "Terraform"
+    CostCenter    = "Infrastructure"
+    Owner         = "DevOps"
+    IaC           = "true"
+    Repository    = "aws-vpc"
+    LastModified  = timestamp()
   }
 
 }
