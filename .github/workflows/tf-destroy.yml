@@ -15,14 +15,23 @@ on:
 env:
   AWS_REGION: us-east-1
   TF_VERSION: latest
+  # Terraform Variables
+  TF_VAR_region: us-east-1
+  TF_VAR_cidr_block: "10.0.0.0/16"
+  TF_VAR_subnet_public_a: "10.0.0.0/19"
+  TF_VAR_subnet_public_b: "10.0.64.0/19"
+  TF_VAR_subnet_public_c: "10.0.128.0/19"
+  TF_VAR_subnet_private_a: "10.0.32.0/19"
+  TF_VAR_subnet_private_b: "10.0.96.0/19"
+  TF_VAR_subnet_private_c: "10.0.160.0/19"
 
 jobs:
   tf-vpc-destroy:
     name: "Terraform VPC Destroy"
     runs-on: ubuntu-latest
-    #defaults:
-      # run:
-      #   working-directory: terraform
+    defaults:
+       run:
+         working-directory: terraform
     permissions:
       contents: read
       pull-requests: write
@@ -67,17 +76,17 @@ jobs:
     - name: Terraform Plan Destroy
       run: |
         if [ -n "${{ github.event.inputs.target_resource }}" ]; then
-          terraform plan -destroy --var-file=./terraform-vpc.tfvars -target="${{ github.event.inputs.target_resource }}" -no-color
+          terraform plan -destroy -target="${{ github.event.inputs.target_resource }}" -no-color
         else
-          terraform plan -destroy --var-file=./terraform-vpc.tfvars -no-color
+          terraform plan -destroy -no-color
         fi
 
     - name: VPC Destroy
       run: |
         if [ -n "${{ github.event.inputs.target_resource }}" ]; then
-          terraform destroy -auto-approve --var-file=./terraform-vpc.tfvars -target="${{ github.event.inputs.target_resource }}"
+          terraform destroy -auto-approve -target="${{ github.event.inputs.target_resource }}"
         else
-          terraform destroy -auto-approve --var-file=./terraform-vpc.tfvars
+          terraform destroy -auto-approve
         fi
 
     - name: Generate summary
