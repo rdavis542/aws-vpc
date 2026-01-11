@@ -1,38 +1,94 @@
-name: "aws-vpc-destroy"
+name: "AWS VPC Destroy"
 
 on:
-#  push:
-#    branches: [ "destroy" ]
   workflow_dispatch:
+    inputs:
+      confirm_destroy:
+        description: 'Type "destroy" to confirm destruction of all resources'
+        required: true
+        type: string
+      target_resource:
+        description: 'Optional: Specific resource to destroy (leave empty for all)'
+        required: false
+        type: string
 
 env:
-  AWS_REGION: us-east-1   
+  AWS_REGION: us-east-1
+  TF_VERSION: latest
 
 jobs:
-  tf-vpc-destrpu:
-    name:  "Terraform VPC Destroy"
+  tf-vpc-destroy:
+    name: "Terraform VPC Destroy"
     runs-on: ubuntu-latest
     defaults:
       run:
         working-directory: ./terraform
     permissions:
-        pull-requests: write
+      contents: read
+      pull-requests: write
+      id-token: write
+
     steps:
-    - name: Checkout
-      uses: actions/checkout@v3
+    - name: Validate destroy confirmation
+      run: |
+        if [ "${{ github.event.inputs.confirm_destroy }}" != "destroy" ]; then
+          echo "::error::Destroy confirmation failed. You must type 'destroy' to proceed."
+          exit 1
+        fi
+
+    - name: Checkout repository
+      uses: actions/checkout@v4
 
     - name: Configure AWS credentials
-      uses: aws-actions/configure-aws-credentials@v2
+      uses: aws-actions/configure-aws-credentials@v4
       with:
         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: ${{ env.AWS_REGION }}
 
     - name: Setup Terraform
-      uses: hashicorp/setup-terraform@v2
+      uses: hashicorp/setup-terraform@v3
+      with:
+        terraform_version: ${{ env.TF_VERSION }}
 
-    - name: Initialize TF
+    - name: Cache Terraform plugins
+      uses: actions/cache@v4
+      with:
+        path: |
+          ~/.terraform.d/plugin-cache
+          terraform/.terraform
+        key: ${{ runner.os }}-terraform-${{ hashFiles('terraform/.terraform.lock.hcl') }}
+        restore-keys: |
+          ${{ runner.os }}-terraform-
+
+    - name: Terraform Init
       run: terraform init
 
+    - name: Terraform Plan Destroy
+      run: |
+        if [ -n "${{ github.event.inputs.target_resource }}" ]; then
+          terraform plan -destroy --var-file=./terraform-vpc.tfvars -target="${{ github.event.inputs.target_resource }}" -no-color
+        else
+          terraform plan -destroy --var-file=./terraform-vpc.tfvars -no-color
+        fi
+
     - name: VPC Destroy
-      run: terraform destroy -auto-approve --var-file=./terraform-vpc.tfvars
+      run: |
+        if [ -n "${{ github.event.inputs.target_resource }}" ]; then
+          terraform destroy -auto-approve --var-file=./terraform-vpc.tfvars -target="${{ github.event.inputs.target_resource }}"
+        else
+          terraform destroy -auto-approve --var-file=./terraform-vpc.tfvars
+        fi
+
+    - name: Generate summary
+      if: always()
+      run: |
+        echo "### Terraform Destroy Results" >> $GITHUB_STEP_SUMMARY
+        echo "**Status:** ${{ job.status }}" >> $GITHUB_STEP_SUMMARY
+        echo "**Region:** ${{ env.AWS_REGION }}" >> $GITHUB_STEP_SUMMARY
+        if [ -n "${{ github.event.inputs.target_resource }}" ]; then
+          echo "**Target:** ${{ github.event.inputs.target_resource }}" >> $GITHUB_STEP_SUMMARY
+        else
+          echo "**Target:** All resources" >> $GITHUB_STEP_SUMMARY
+        fi
+        echo "**Triggered by:** @${{ github.actor }}" >> $GITHUB_STEP_SUMMARY
