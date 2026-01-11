@@ -22,7 +22,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: ./terraform
+        working-directory: terraform
     permissions:
       contents: read
       pull-requests: write
@@ -123,7 +123,7 @@ jobs:
     if: github.event_name == 'workflow_dispatch'
     defaults:
       run:
-        working-directory: ./terraform
+        working-directory: terraform
     permissions:
       contents: read
       pull-requests: write
