@@ -46,32 +46,8 @@ variable "subnet_public_c" {
 }
 
 variable "cidr_block" {
-
   type        = string
-  description = "VPC cidr range"
-
-}
-
-variable "azA" {
-
-  type        = string
-  description = "Avail zone assigned"
-
-}
-
-variable "azB" {
-
-  type        = string
-  description = "Avail zone assigned"
-
-}
-
-
-variable "azC" {
-
-  type        = string
-  description = "Avail zone assigned"
-
+  description = "VPC CIDR range"
 }
 
 
