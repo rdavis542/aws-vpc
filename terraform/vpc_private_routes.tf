@@ -5,7 +5,7 @@ resource "aws_route_table" "private_route_table_a" {
   #   cidr_block = "0.0.0.0/0"
   #   gateway_id = aws_nat_gateway.nat_gateway.id
   # }
-  tags = merge(var.default_tags, {Name = "private-route-table-A"}, local.common_tags)
+  tags = merge(var.default_tags, { Name = "private-route-table-A" }, local.common_tags)
 }
 
 
@@ -20,7 +20,7 @@ resource "aws_route_table" "private_route_table_b" {
   #   cidr_block = "0.0.0.0/0"
   #   gateway_id = aws_nat_gateway.nat_gateway.id
   # }
-  tags = merge(var.default_tags, {Name = "private-route-table-B"}, local.common_tags)
+  tags = merge(var.default_tags, { Name = "private-route-table-B" }, local.common_tags)
 }
 
 resource "aws_route_table_association" "private_route_table_association_b" {
@@ -34,7 +34,7 @@ resource "aws_route_table" "private_route_table_c" {
   #   cidr_block = "0.0.0.0/0"
   #   gateway_id = aws_nat_gateway.nat_gateway.id
   # }
-  tags = merge(var.default_tags, {Name = "private-route-table-C"}, local.common_tags)
+  tags = merge(var.default_tags, { Name = "private-route-table-C" }, local.common_tags)
 }
 
 resource "aws_route_table_association" "private_route_table_association_c" {
@@ -44,7 +44,7 @@ resource "aws_route_table_association" "private_route_table_association_c" {
 
 # resource "aws_eip" "nat_gateway_eip" {
 #   domain = "vpc"
-  
+
 #   tags = {
 #     Name = "nat-eip"
 #   }
@@ -75,5 +75,5 @@ resource "aws_vpc_endpoint" "s3_private_endpoint" {
     aws_route_table.private_route_table_c.id
   ]
 
-  tags = merge(var.default_tags, {Name = "s3-vpc-endpoint"}, local.common_tags)
+  tags = merge(var.default_tags, { Name = "s3-vpc-endpoint" }, local.common_tags)
 }
