@@ -67,7 +67,7 @@ resource "aws_route_table_association" "private_route_table_association_c" {
 
 resource "aws_vpc_endpoint" "s3_private_endpoint" {
   vpc_id       = aws_vpc.main.id
-  service_name = "com.amazonaws.us-east-1.s3"
+  service_name = "com.amazonaws.us-east-2.s3"
 
   route_table_ids = [
     aws_route_table.private_route_table_a.id,

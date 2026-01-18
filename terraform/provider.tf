@@ -9,7 +9,7 @@ terraform {
   backend "s3" {
     bucket  = "tf-state-replication-source-350726165848"
     key     = "terraform-vpc.tfstate"
-    region  = "us-east-1"
+    region  = "us-east-2"
     encrypt = true
   }
 }
