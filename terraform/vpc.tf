@@ -6,8 +6,12 @@ resource "aws_vpc" "main" {
   enable_dns_hostnames = true
 
   tags = {
-    Name = "vpc-east-1"
+    Name = "vpc-east-2"
   }
+
+  lifecycle {
+  ignore_changes = [tags_all]
+}
 
 }
 
@@ -15,7 +19,7 @@ resource "aws_internet_gateway" "main-east-ig" {
   vpc_id = aws_vpc.main.id
 
   tags = {
-    Name = "inet-gw-east-1"
+    Name = "inet-gw-east-2"
   }
 
 }
