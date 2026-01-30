@@ -13,6 +13,10 @@ resource "aws_subnet" "vpc-public-subnet-a" {
     Tier = "web"
     AZ   = data.aws_availability_zones.available.names[0]
   }
+
+  lifecycle {
+    ignore_changes = [tags_all]
+  }
 }
 
 resource "aws_subnet" "vpc-public-subnet-b" {
@@ -27,6 +31,10 @@ resource "aws_subnet" "vpc-public-subnet-b" {
     Tier = "web"
     AZ   = data.aws_availability_zones.available.names[1]
   }
+
+  lifecycle {
+    ignore_changes = [tags_all]
+  }
 }
 
 resource "aws_subnet" "vpc-public-subnet-c" {
@@ -40,6 +48,10 @@ resource "aws_subnet" "vpc-public-subnet-c" {
     Type = "public"
     Tier = "web"
     AZ   = data.aws_availability_zones.available.names[2]
+  }
+
+  lifecycle {
+    ignore_changes = [tags_all]
   }
 }
 
@@ -57,6 +69,10 @@ resource "aws_subnet" "vpc-private-subnet-a" {
     Tier = "app"
     AZ   = data.aws_availability_zones.available.names[0]
   }
+
+  lifecycle {
+    ignore_changes = [tags_all]
+  }
 }
 
 resource "aws_subnet" "vpc-private-subnet-b" {
@@ -70,6 +86,10 @@ resource "aws_subnet" "vpc-private-subnet-b" {
     Tier = "app"
     AZ   = data.aws_availability_zones.available.names[1]
   }
+
+  lifecycle {
+    ignore_changes = [tags_all]
+  }
 }
 
 resource "aws_subnet" "vpc-private-subnet-c" {
@@ -82,5 +102,9 @@ resource "aws_subnet" "vpc-private-subnet-c" {
     Type = "private"
     Tier = "app"
     AZ   = data.aws_availability_zones.available.names[2]
+  }
+
+  lifecycle {
+    ignore_changes = [tags_all]
   }
 }
