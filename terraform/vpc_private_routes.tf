@@ -8,20 +8,12 @@ resource "aws_route_table" "private_route_table_a" {
   tags = {
     Name = "private-route-table-A"
   }
-
-  lifecycle {
-    ignore_changes = [tags_all]
-  }
 }
 
 
 resource "aws_route_table_association" "private_route_table_association_a" {
   subnet_id      = aws_subnet.vpc-private-subnet-a.id
   route_table_id = aws_route_table.private_route_table_a.id
-
-  lifecycle {
-    ignore_changes = [tags_all]
-  }
 }
 
 resource "aws_route_table" "private_route_table_b" {
@@ -33,19 +25,11 @@ resource "aws_route_table" "private_route_table_b" {
   tags = {
     Name = "private-route-table-B"
   }
-
-  lifecycle {
-    ignore_changes = [tags_all]
-  }
 }
 
 resource "aws_route_table_association" "private_route_table_association_b" {
   subnet_id      = aws_subnet.vpc-private-subnet-b.id
   route_table_id = aws_route_table.private_route_table_b.id
-
-  lifecycle {
-    ignore_changes = [tags_all]
-  }
 }
 
 resource "aws_route_table" "private_route_table_c" {
@@ -57,19 +41,11 @@ resource "aws_route_table" "private_route_table_c" {
   tags = {
     Name = "private-route-table-C"
   }
-
-  lifecycle {
-    ignore_changes = [tags_all]
-  }
 }
 
 resource "aws_route_table_association" "private_route_table_association_c" {
   subnet_id      = aws_subnet.vpc-private-subnet-c.id
   route_table_id = aws_route_table.private_route_table_c.id
-
-  lifecycle {
-    ignore_changes = [tags_all]
-  }
 }
 
 # resource "aws_eip" "nat_gateway_eip" {
@@ -107,9 +83,5 @@ resource "aws_vpc_endpoint" "s3_private_endpoint" {
 
   tags = {
     Name = "s3-vpc-endpoint"
-  }
-
-  lifecycle {
-    ignore_changes = [tags_all]
   }
 }

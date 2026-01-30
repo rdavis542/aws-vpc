@@ -10,10 +10,6 @@ resource "aws_route_table" "public_route_table_a" {
   tags = {
     Name = "main-public-route-table-A"
   }
-
-  lifecycle {
-    ignore_changes = [tags_all]
-  }
 }
 
 resource "aws_route_table" "public_route_table_b" {
@@ -25,10 +21,6 @@ resource "aws_route_table" "public_route_table_b" {
 
   tags = {
     Name = "main-public-route-table-B"
-  }
-
-  lifecycle {
-    ignore_changes = [tags_all]
   }
 }
 
@@ -42,37 +34,21 @@ resource "aws_route_table" "public_route_table_c" {
   tags = {
     Name = "main-public-route-table-C"
   }
-
-  lifecycle {
-    ignore_changes = [tags_all]
-  }
 }
 
 resource "aws_route_table_association" "public_route_table_association_a" {
   subnet_id      = aws_subnet.vpc-public-subnet-a.id
   route_table_id = aws_route_table.public_route_table_a.id
-
-  lifecycle {
-    ignore_changes = [tags_all]
-  }
 }
 
 resource "aws_route_table_association" "public_route_table_association_b" {
   subnet_id      = aws_subnet.vpc-public-subnet-b.id
   route_table_id = aws_route_table.public_route_table_b.id
-
-  lifecycle {
-    ignore_changes = [tags_all]
-  }
 }
 
 resource "aws_route_table_association" "public_route_table_association_c" {
   subnet_id      = aws_subnet.vpc-public-subnet-c.id
   route_table_id = aws_route_table.public_route_table_c.id
-
-  lifecycle {
-    ignore_changes = [tags_all]
-  }
 }
 
 ###### Route traffic between public/private VLAN with below

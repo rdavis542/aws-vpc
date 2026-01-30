@@ -8,11 +8,6 @@ resource "aws_vpc" "main" {
   tags = {
     Name = "vpc-east-2"
   }
-
-  lifecycle {
-    ignore_changes = [tags_all]
-  }
-
 }
 
 resource "aws_internet_gateway" "main-east-ig" {
@@ -20,9 +15,5 @@ resource "aws_internet_gateway" "main-east-ig" {
 
   tags = {
     Name = "inet-gw-east-2"
-  }
-
-  lifecycle {
-    ignore_changes = [tags_all]
   }
 }
