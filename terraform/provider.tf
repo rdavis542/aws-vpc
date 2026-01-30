@@ -16,8 +16,19 @@ terraform {
 
 
 provider "aws" {
-
   region = var.region
 
-}
+  default_tags {
+    tags = {
+      Environment = "development"
+      Project     = "aws-vpc"
+      ManagedBy   = "Terraform"
+      Repository  = "aws-vpc"
+      Owner       = "ryan_davis542@outlook.com"
+      CostCenter  = "Personal"
+      Region       = var.region
+      LastModified = timestamp()
 
+    }
+  }
+}

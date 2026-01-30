@@ -51,11 +51,3 @@ variable "cidr_block" {
 }
 
 
-variable "default_tags" {
-  description = "Default tags too apply to all resources"
-  default = {
-    "Infrastructure" = "VPC"
-    "REPO"           = "aws-vpc"
-  }
-
-}
