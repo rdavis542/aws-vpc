@@ -20,13 +20,13 @@ provider "aws" {
 
   default_tags {
     tags = {
-      Environment  = "development"
-      Project      = "aws-vpc"
-      ManagedBy    = "Terraform"
-      Repository   = "aws-vpc"
-      Owner        = "ryan_davis542@outlook.com"
-      CostCenter   = "Personal"
-      Region       = var.region
+      Environment = "development"
+      Project     = "aws-vpc"
+      ManagedBy   = "Terraform"
+      Repository  = "aws-vpc"
+      Owner       = "ryan_davis542@outlook.com"
+      CostCenter  = "Network"
+      Region      = var.region
     }
   }
 }
