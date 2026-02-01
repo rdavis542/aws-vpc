@@ -50,4 +50,10 @@ variable "cidr_block" {
   description = "VPC CIDR range"
 }
 
+variable "allowed_ssh_cidr_blocks" {
+  type        = list(string)
+  description = "CIDR blocks allowed to SSH to bastion hosts"
+  default     = []
+}
+
 

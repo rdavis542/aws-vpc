@@ -29,13 +29,16 @@ resource "aws_network_acl" "public" {
     to_port    = 443
   }
 
-  ingress {
-    protocol   = "tcp"
-    rule_no    = 120
-    action     = "allow"
-    cidr_block = "0.0.0.0/0"
-    from_port  = 22
-    to_port    = 22
+  dynamic "ingress" {
+    for_each = var.allowed_ssh_cidr_blocks
+    content {
+      protocol   = "tcp"
+      rule_no    = 120 + index(var.allowed_ssh_cidr_blocks, ingress.value)
+      action     = "allow"
+      cidr_block = ingress.value
+      from_port  = 22
+      to_port    = 22
+    }
   }
 
   # Ephemeral ports for return traffic

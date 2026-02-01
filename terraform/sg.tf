@@ -140,13 +140,13 @@ resource "aws_security_group" "bastion" {
   description = "Security group for bastion/jump hosts"
   vpc_id      = aws_vpc.main.id
 
-  # SSH from specific IPs (update with your IP ranges)
+  # SSH from specific IPs
   ingress {
     description = "SSH access"
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"] # TODO: Restrict to your IP ranges
+    cidr_blocks = var.allowed_ssh_cidr_blocks
   }
 
   # Allow all outbound traffic
