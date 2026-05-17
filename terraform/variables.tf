@@ -56,4 +56,10 @@ variable "allowed_ssh_cidr_blocks" {
   default     = []
 }
 
+variable "enable_nat_gateway" {
+  type        = bool
+  description = "Create a NAT gateway so private subnets can reach the internet (~$33/month)"
+  default     = false
+}
+
 

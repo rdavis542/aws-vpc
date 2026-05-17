@@ -64,16 +64,15 @@ output "internet_gateway_id" {
   value       = aws_internet_gateway.main-east-ig.id
 }
 
-# NAT Gateway outputs (uncomment if NAT Gateway is enabled)
-# output "nat_gateway_id" {
-#   description = "ID of the NAT Gateway"
-#   value       = aws_nat_gateway.nat_gateway.id
-# }
-#
-# output "nat_gateway_public_ip" {
-#   description = "Public IP of the NAT Gateway"
-#   value       = aws_eip.nat_gateway_eip.public_ip
-# }
+output "nat_gateway_id" {
+  description = "ID of the NAT Gateway (null if enable_nat_gateway = false)"
+  value       = var.enable_nat_gateway ? aws_nat_gateway.nat_gateway[0].id : null
+}
+
+output "nat_gateway_public_ip" {
+  description = "Public IP of the NAT Gateway (null if enable_nat_gateway = false)"
+  value       = var.enable_nat_gateway ? aws_eip.nat_gateway_eip[0].public_ip : null
+}
 
 # Security Group outputs
 output "sg_web_id" {
