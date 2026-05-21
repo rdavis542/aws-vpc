@@ -24,6 +24,7 @@ env:
   TF_VAR_subnet_private_a: "10.0.32.0/19"
   TF_VAR_subnet_private_b: "10.0.96.0/19"
   TF_VAR_subnet_private_c: "10.0.160.0/19"
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
 jobs:
   tf-vpc-destroy:
